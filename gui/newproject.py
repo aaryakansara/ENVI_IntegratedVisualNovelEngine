@@ -1,6 +1,8 @@
 import tkinter as tk
-from tkinter import Button, Menu, filedialog, Text 
 import os 
+from tkinter import *
+from tkinter import filedialog 
+
 
 self = tk.Tk()
 self.title('Create New Project')
@@ -117,12 +119,23 @@ buthelp.pack()
 
 frame = tk.Frame(self, bg="lightblue")
 frame.place(relwidth=0.3, relheight=0.919, relx=0.01, rely=0.06)
+v = Scrollbar(frame)
+v.pack(side = RIGHT, fill = Y)
 
 frame0 = tk.Frame(self, bg="lightblue")
 frame0.place(relwidth=0.6665, relheight=0.66, relx=0.32, rely=0.06)
         
 mainframe = tk.Frame(frame0, bg="grey")
 mainframe.place(relwidth=0.99, relheight=0.98, relx=0.005, rely=0.01)
+prevbuttonframe = tk.Frame(frame0, bg="#6495ED")
+prevbuttonframe.place(relwidth=0.05, relheight=0.1, relx=0, rely=0.45)
+prevbutton = tk.Button(prevbuttonframe, text="<", padx=95, pady=10, fg="white", borderwidth=0, font=("bold", 30), bg="darkorchid", )
+prevbutton.pack()
+
+nextbuttonframe = tk.Frame(frame0, bg="#6495ED")
+nextbuttonframe.place(relwidth=0.05, relheight=0.1, relx=0.95, rely=0.45)
+nextbutton = tk.Button(nextbuttonframe, text=">", padx=95, pady=10, fg="white", borderwidth=0, font=("bold", 30), bg="darkorchid", )
+nextbutton.pack()
 
 frame1 = tk.Frame(self, bg="lightblue")
 frame1.place(relwidth=0.6665, relheight=0.2385, relx=0.32, rely=0.74045)
