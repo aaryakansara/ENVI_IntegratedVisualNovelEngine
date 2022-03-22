@@ -105,7 +105,7 @@ class Homepage(tk.Frame):
 
         frame2 = tk.Frame(self, bg="maroon")
         frame2.place(relwidth=0.745, relheight=0.95, relx=0.24, rely=0.025)
-        self.img = PhotoImage(file='ENVI/ENVI Projects/Personal-project/img-folder/Myproject.png')
+        self.img = PhotoImage(file='ENVI_algo/ENVI-Projects/Personal-project/img-folder/Myproject.png')
         label = Label(frame2, image = self.img)
         label.pack()
 
