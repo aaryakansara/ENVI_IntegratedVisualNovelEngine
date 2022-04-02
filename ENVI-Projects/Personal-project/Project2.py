@@ -1,5 +1,4 @@
 import tkinter as tk
-import zoneinfo
 import pygame
 from tkinter import *
 from tkinter import SUNKEN, PhotoImage, ttk

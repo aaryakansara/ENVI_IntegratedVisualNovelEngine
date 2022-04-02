@@ -1,7 +1,7 @@
 import tkinter as tk
-import os 
 from tkinter import *
-from tkinter import filedialog 
+from tkinter import filedialog
+from PIL import ImageTk, Image 
 
 
 self = tk.Tk()
@@ -13,18 +13,10 @@ self.resizable(True, True)
 def loadmusic():
             filename = filedialog.askopenfilename(initialdir="C:/Users/Admin/Music", title="Select Your Music File",
             filetypes=(("MP3","*.mp3"), ("WAV", "*.wav"), ("AAC", "*.aac"), ("3GP", "*.3gp"), ("WEBM", "*.webm")))
-
-        # def warn(event):
-        #     res = messagebox.askquestion('Warning!!!', 'Are you sure you want to go back?\nThis will take you back to Home Page \nAny unsaved progress could be lost!!')
-        #     if res == 'yes':
-        #         controller.show_frame(HomePage)
-        #     elif res == 'no':
-        #         exit
-        #     else:
-        #         messagebox.showwarning('Error', 'Something went wrong!')
-                
-        # def fullscreen():
-        #     self.attributes('-fullsecreen', True)
+            
+def graphic():
+            filename = filedialog.askopenfilename(initialdir="/", title="Select Image or Video File",
+            filetypes=(("JPG","*.jpg"), ("PNG","*.png"), ("MP4","*.mp4"), ("MKV","*.mkv"), ("All Files", "*.*")))
 
             
 canvas = tk.Canvas(self, height=700, width=1340, bg="white")
@@ -127,18 +119,83 @@ frame0.place(relwidth=0.6665, relheight=0.66, relx=0.32, rely=0.06)
         
 mainframe = tk.Frame(frame0, bg="grey")
 mainframe.place(relwidth=0.99, relheight=0.98, relx=0.005, rely=0.01)
+
+photo = Image.open("ENVI_algo/gui/logo/addimage.png")
+resize = photo.resize((950, 700))
+img = ImageTk.PhotoImage(resize)
+badd = tk.Button(mainframe, text="+ADD IMAGE OR VIDEO", padx=600, pady=300, fg="white", image= img, borderwidth=0, font=('Microsoft YaHei UI', 15, "bold"), bg="grey",relief=SUNKEN, command=graphic)# command=lambda: controller.show_frame(FlowmapPage))
+badd.pack()
+
 prevbuttonframe = tk.Frame(frame0, bg="#6495ED")
 prevbuttonframe.place(relwidth=0.05, relheight=0.1, relx=0, rely=0.45)
 prevbutton = tk.Button(prevbuttonframe, text="<", padx=95, pady=10, fg="white", borderwidth=0, font=("bold", 30), bg="darkorchid", )
 prevbutton.pack()
+
 nextbuttonframe = tk.Frame(frame0, bg="#6495ED")
 nextbuttonframe.place(relwidth=0.05, relheight=0.1, relx=0.95, rely=0.45)
 nextbutton = tk.Button(nextbuttonframe, text=">", padx=95, pady=10, fg="white", borderwidth=0, font=("bold", 30), bg="darkorchid", )
 nextbutton.pack()
-textframe1 = tk.Frame(mainframe, bg="white")
-textframe1.place(relwidth=1, relheight=0.25, relx=0, rely=0.725)
-textframe2 = tk.Frame(mainframe, bg="lightgrey")
-textframe2.place(relwidth=0.2, relheight=0.05, relx=0.01, rely=0.675)
+
+textframe1 = tk.Frame(mainframe, bg="lightgrey")
+textframe1.place(relwidth=0.2, relheight=0.05, relx=0.01, rely=0.675)
+textframe2 = tk.Frame(mainframe, bg="white")
+textframe2.place(relwidth=1, relheight=0.25, relx=0, rely=0.725)
+
+
+# def on_entry_click(event):
+#     """function that gets called whenever entry is clicked"""
+#     if entry.cget('fg') == 'grey':
+#        entry.delete(0, "end") # delete all the text in the entry
+#        entry.insert(0, '') #Insert blank for user input
+#        entry.config(fg = 'black')
+# def on_focusout(event):
+#     if entry.get() == '':
+#         entry.insert(0, "+Add Character's Name Here")
+#         entry.config(fg = 'grey')
+        
+# entry = tk.Entry(textframe1, bd=1)
+# entry.insert(0, "+Add Character's Name Here")
+# entry.bind('<FocusIn>', on_entry_click)
+# entry.bind('<FocusOut>', on_focusout)
+# entry.config(fg = 'grey')
+# entry.pack(side="left")
+# entry.place(x=0,y=0, width=200, height=25)
+
+
+# def on_entry_click1(event):
+#     """function that gets called whenever entry is clicked"""
+#     if entry1.cget('fg') == 'grey':
+#        entry1.delete(0, "end") # delete all the text in the entry
+#        entry1.insert(0, '') #Insert blank for user input
+#        entry1.config(fg = 'black')
+# def on_focusout1(event):
+#     if entry1.get() == '':
+#         entry1.insert(0, "+Add Text- Story Plot, Character's Dialogue, Creator Narration, etc.")
+#         entry1.config(fg = 'grey')
+
+# entry1 = tk.Entry(textframe2, bd=1)
+# entry1.insert(0, "+Add Text- Story Plot, Character's Dialogue, Creator Narration, etc.")
+# entry1.bind('<FocusIn>', on_entry_click1)
+# entry1.bind('<FocusOut>', on_focusout1)
+# entry1.config(fg = 'grey')
+# entry1.pack(side="left", anchor=NW)
+# entry1.place(x=0,y=0, width=887, height=120)
+
+my_text1=Text(textframe1, width=100, height=10,font=('Helvetica',12,))#)
+my_text1.pack()
+text_file=open("ENVI_algo/gui/temp/script.txt",'r')
+content=text_file.read()
+my_text1.insert(END, content)
+text_file.close()
+
+my_text2=Text(textframe2, width=100, height=10,font=('Helvetica',16))
+my_text2.pack()
+text_file=open("ENVI_algo/gui/temp/script.txt",'r')
+content=text_file.read()
+my_text2.insert(END, content)
+text_file.close()
+
+
 
 frame1 = tk.Frame(self, bg="lightblue")
 frame1.place(relwidth=0.6665, relheight=0.2385, relx=0.32, rely=0.74045)
@@ -147,22 +204,27 @@ buttonframe = tk.Frame(frame1, bg="#6495ED")
 buttonframe.place(relwidth=0.275, relheight=0.25, relx=0.02, rely=0.16)
 bmusic = tk.Button(buttonframe, text="MUSIC", padx=95, pady=10, fg="white", borderwidth=0, font=('Microsoft YaHei UI', 15, "bold"), bg="#FF6103", command=loadmusic)
 bmusic.pack()
+
 buttonframe = tk.Frame(frame1, bg="#6495ED")
 buttonframe.place(relwidth=0.275, relheight=0.25, relx=0.364, rely=0.16)
 bflow = tk.Button(buttonframe, text="FLOW MAP", padx=75, pady=10, fg="white", borderwidth=0, font=('Microsoft YaHei UI', 15, "bold"), bg="#FF6103",)# command=lambda: controller.show_frame(FlowmapPage))
 bflow.pack()
+
 buttonframe = tk.Frame(frame1, bg="#6495ED")
 buttonframe.place(relwidth=0.275, relheight=0.25, relx=0.705, rely=0.16)
 bbranch = tk.Button(buttonframe, text="BRANCH OPTIONS", padx=75, pady=10, fg="white", borderwidth=0, font=('Microsoft YaHei UI', 15, "bold"), bg="#FF6103")
 bbranch.pack()
+
 buttonframe = tk.Frame(frame1, bg="#6495ED")
 buttonframe.place(relwidth=0.275, relheight=0.25, relx=0.02, rely=0.6)
 bimageset = tk.Button(buttonframe, text="IMAGE SETTINGS", padx=75, pady=10, fg="white", borderwidth=0, font=('Microsoft YaHei UI', 15, "bold"), bg="#FF6103")
 bimageset.pack()
+
 buttonframe = tk.Frame(frame1, bg="#6495ED")
 buttonframe.place(relwidth=0.275, relheight=0.25, relx=0.364, rely=0.6)
 bparaset = tk.Button(buttonframe, text="PARAMETER SETTINGS", padx=75, pady=10, fg="white", borderwidth=0, font=('Microsoft YaHei UI', 15, "bold"), bg="#FF6103")
 bparaset.pack()
+
 buttonframe = tk.Frame(frame1, bg="#6495ED")
 buttonframe.place(relwidth=0.275, relheight=0.25, relx=0.705, rely=0.6)
 bsandn = tk.Button(buttonframe, text="SAVE & NEXT", padx=75, pady=10, fg="white", font=('Microsoft YaHei UI', 15, "bold"), bg="#FF6103")
