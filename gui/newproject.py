@@ -7,18 +7,24 @@ from PIL import ImageTk, Image
 self = tk.Tk()
 self.title('Create New Project')
 self.resizable(True, True)
-
-
+self.state("zoomed")
 
 def loadmusic():
             filename = filedialog.askopenfilename(initialdir="C:/Users/Admin/Music", title="Select Your Music File",
             filetypes=(("MP3","*.mp3"), ("WAV", "*.wav"), ("AAC", "*.aac"), ("3GP", "*.3gp"), ("WEBM", "*.webm")))
             
-def graphic():
-            filename = filedialog.askopenfilename(initialdir="/", title="Select Image or Video File",
-            filetypes=(("JPG","*.jpg"), ("PNG","*.png"), ("MP4","*.mp4"), ("MKV","*.mkv"), ("All Files", "*.*")))
-
-            
+# def graphic():
+#             filename = filedialog.askopenfilename(initialdir="/", title="Select Image or Video File",
+#             filetypes=(("JPG","*.jpg"), ("PNG","*.png"), ("MP4","*.mp4"), ("MKV","*.mkv"), ("All Files", "*.*")))
+#             badd.destroy()
+#             my_image=Image.open(filename)
+#             resize = my_image.resize((950, 700))
+#             img1 = ImageTk.PhotoImage(resize)
+#             # badd1 = tk.Button(mainframe, text="+ADD IMAGE OR VIDEO", padx=600, pady=300, fg="white", image= img1, borderwidth=0, font=('Microsoft YaHei UI', 15, "bold"),relief=SUNKEN, command=graphic)# command=lambda: controller.show_frame(FlowmapPage))
+#             # badd1.pack()
+#             label=Label(mainframe,image=img1)
+#             label.image = img1
+#             label.pack()
 canvas = tk.Canvas(self, height=700, width=1340, bg="white")
 canvas.pack()
 
@@ -36,6 +42,10 @@ taskfile.place(relwidth=0.04, relheight=0.9, relx=0.0009, rely=0.05)
         
 bfile = tk.Label(taskfile, text="File", fg="white", padx=25, pady=15, font=('Microsoft YaHei UI', 10, "bold"), bg="red2") #
 bfile.pack()
+
+def fileinformation():
+    tk.messagebox.showinfo(title="Help", message=None)
+
 m1 = Menu(bfile, tearoff = 0)
 m1.add_command(label ="Open Existing Project")
 m1.add_command(label ="New Project")
@@ -43,7 +53,7 @@ m1.add_separator()
 m1.add_command(label ="Save (Ctrl + S)")
 m1.add_command(label ="Save as (Ctrl + F8)")
 m1.add_separator()
-m1.add_command(label ="Help")
+m1.add_command(label ="Help", command=fileinformation)
 def do_popup(event):
             try:
                 m1.tk_popup(event.x_root, event.y_root)
@@ -51,8 +61,7 @@ def do_popup(event):
                 m1.grab_release()
         
 bfile.bind("<Button-1>", do_popup)
-        
-        
+              
 taskcompile = tk.Frame(frameT, bg="grey")
 taskcompile.place(relwidth=0.06009, relheight=0.9, relx=0.042, rely=0.05)
 bcompile = tk.Label(taskcompile, text="Compile", padx=25, pady=15, fg="white", font=('Microsoft YaHei UI', 10, "bold"), bg="red2")
@@ -120,11 +129,57 @@ frame0.place(relwidth=0.6665, relheight=0.66, relx=0.32, rely=0.06)
 mainframe = tk.Frame(frame0, bg="grey")
 mainframe.place(relwidth=0.99, relheight=0.98, relx=0.005, rely=0.01)
 
+def graphic():
+            filename = filedialog.askopenfilename(initialdir="/", title="Select Image or Video File",
+            filetypes=(("JPG","*.jpg"), ("PNG","*.png"), ("MP4","*.mp4"), ("MKV","*.mkv"), ("All Files", "*.*")))
+            
+            my_image=Image.open(filename)
+            resize = my_image.resize((900, 350))
+            img1 = ImageTk.PhotoImage(resize)
+            badd1 = Label(mainframe, image= img1, borderwidth=0)
+            badd1.image = img1
+            badd1.pack()
+            
+            def anotherimg():
+                graphic()
+                badd1.pack_forget()
+                
+            def deleteimg():
+                badd1.pack_forget()
+                badd.pack()
+                
+            def information():
+                tk.messagebox.showinfo(title="Help", message=None)
+                
+            m = Menu(taskfile, tearoff = 0)
+            m.add_command(label ="Add another image or video", command=anotherimg)
+            m.add_command(label ="Delete current image or video", command=deleteimg)
+            m.add_separator()
+            m.add_command(label ="Copy")
+            m.add_command(label ="Paste")
+            m.add_separator()
+            m.add_command(label ="Help", command=information)
+            
+            
+            def do_popup(event):
+                try:
+                    m.tk_popup(event.x_root, event.y_root)
+                finally:
+                    m.grab_release()
+            
+            badd1.bind("<Button-3>", do_popup)
+            # label=Button(mainframe,image=img1)
+            # label.image = img1
+            # label.pack()
+            badd.pack_forget()
+
 photo = Image.open("ENVI_algo/gui/logo/addimage.png")
 resize = photo.resize((950, 700))
 img = ImageTk.PhotoImage(resize)
 badd = tk.Button(mainframe, text="+ADD IMAGE OR VIDEO", padx=600, pady=300, fg="white", image= img, borderwidth=0, font=('Microsoft YaHei UI', 15, "bold"), bg="grey",relief=SUNKEN, command=graphic)# command=lambda: controller.show_frame(FlowmapPage))
 badd.pack()
+
+
 
 prevbuttonframe = tk.Frame(frame0, bg="#6495ED")
 prevbuttonframe.place(relwidth=0.05, relheight=0.1, relx=0, rely=0.45)
@@ -136,11 +191,10 @@ nextbuttonframe.place(relwidth=0.05, relheight=0.1, relx=0.95, rely=0.45)
 nextbutton = tk.Button(nextbuttonframe, text=">", padx=95, pady=10, fg="white", borderwidth=0, font=("bold", 30), bg="darkorchid", )
 nextbutton.pack()
 
-textframe1 = tk.Frame(mainframe, bg="lightgrey")
-textframe1.place(relwidth=0.2, relheight=0.05, relx=0.01, rely=0.675)
-textframe2 = tk.Frame(mainframe, bg="white")
-textframe2.place(relwidth=1, relheight=0.25, relx=0, rely=0.725)
-
+textframe1 = tk.Frame(frame0, bg="lightgrey")
+textframe1.place(relwidth=0.2, relheight=0.05, relx=0.01, rely=0.700)
+textframe2 = tk.Frame(frame0, bg="white")
+textframe2.place(relwidth=1, relheight=0.25, relx=0, rely=0.750)
 
 # def on_entry_click(event):
 #     """function that gets called whenever entry is clicked"""
@@ -161,7 +215,6 @@ textframe2.place(relwidth=1, relheight=0.25, relx=0, rely=0.725)
 # entry.pack(side="left")
 # entry.place(x=0,y=0, width=200, height=25)
 
-
 # def on_entry_click1(event):
 #     """function that gets called whenever entry is clicked"""
 #     if entry1.cget('fg') == 'grey':
@@ -181,20 +234,26 @@ textframe2.place(relwidth=1, relheight=0.25, relx=0, rely=0.725)
 # entry1.pack(side="left", anchor=NW)
 # entry1.place(x=0,y=0, width=887, height=120)
 
-my_text1=Text(textframe1, width=100, height=10,font=('Helvetica',12,))#)
+my_text1=Text(textframe1, width=100, height=10,font=('Helvetica',12,), bg="lightgrey")#)
 my_text1.pack()
-text_file=open("ENVI_algo/gui/temp/script.txt",'r')
+text_file=open("ENVI_algo/gui/temp/script1.envi",'r')
 content=text_file.read()
 my_text1.insert(END, content)
 text_file.close()
+def save_txt1():
+    save_file=open("ENVI_algo/gui/temp/script1.envi",'w')
+    save_file.write(my_text1.get(1.0, END))
+
 
 my_text2=Text(textframe2, width=100, height=10,font=('Helvetica',16))
 my_text2.pack()
-text_file=open("ENVI_algo/gui/temp/script.txt",'r')
+text_file=open("ENVI_algo/gui/temp/script2.envi",'r')
 content=text_file.read()
 my_text2.insert(END, content)
 text_file.close()
-
+def save_txt2():
+    save_file=open("ENVI_algo/gui/temp/script2.envi",'w')
+    save_file.write(my_text2.get(1.0, END))
 
 
 frame1 = tk.Frame(self, bg="lightblue")
@@ -227,7 +286,7 @@ bparaset.pack()
 
 buttonframe = tk.Frame(frame1, bg="#6495ED")
 buttonframe.place(relwidth=0.275, relheight=0.25, relx=0.705, rely=0.6)
-bsandn = tk.Button(buttonframe, text="SAVE & NEXT", padx=75, pady=10, fg="white", font=('Microsoft YaHei UI', 15, "bold"), bg="#FF6103")
+bsandn = tk.Button(buttonframe, text="SAVE & NEXT", padx=75, pady=10, fg="white", font=('Microsoft YaHei UI', 15, "bold"), bg="#FF6103", command=lambda: [save_txt1(), save_txt2()])
 bsandn.pack()        
         
         
