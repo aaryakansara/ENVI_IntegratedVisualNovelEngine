@@ -1,4 +1,6 @@
+import os
 import tkinter as tk
+import shutil
 from tkinter import *
 from tkinter import filedialog
 from PIL import ImageTk, Image 
@@ -9,22 +11,15 @@ self.title('Create New Project')
 self.resizable(True, True)
 self.state("zoomed")
 
+img_folder="ENVI_algo/ENVI-Projects/Personal-project/img-folder/"
+music_folder="ENVI_algo/ENVI-Projects/Personal-project/music-folder/"
+
 def loadmusic():
-            filename = filedialog.askopenfilename(initialdir="C:/Users/Admin/Music", title="Select Your Music File",
+            filenamem = filedialog.askopenfilename(initialdir="C:/Users/Admin/Music", title="Select Your Music File",
             filetypes=(("MP3","*.mp3"), ("WAV", "*.wav"), ("AAC", "*.aac"), ("3GP", "*.3gp"), ("WEBM", "*.webm")))
             
-# def graphic():
-#             filename = filedialog.askopenfilename(initialdir="/", title="Select Image or Video File",
-#             filetypes=(("JPG","*.jpg"), ("PNG","*.png"), ("MP4","*.mp4"), ("MKV","*.mkv"), ("All Files", "*.*")))
-#             badd.destroy()
-#             my_image=Image.open(filename)
-#             resize = my_image.resize((950, 700))
-#             img1 = ImageTk.PhotoImage(resize)
-#             # badd1 = tk.Button(mainframe, text="+ADD IMAGE OR VIDEO", padx=600, pady=300, fg="white", image= img1, borderwidth=0, font=('Microsoft YaHei UI', 15, "bold"),relief=SUNKEN, command=graphic)# command=lambda: controller.show_frame(FlowmapPage))
-#             # badd1.pack()
-#             label=Label(mainframe,image=img1)
-#             label.image = img1
-#             label.pack()
+            copy = shutil.copy(filenamem, music_folder)
+            
 canvas = tk.Canvas(self, height=700, width=1340, bg="white")
 canvas.pack()
 
@@ -44,7 +39,9 @@ bfile = tk.Label(taskfile, text="File", fg="white", padx=25, pady=15, font=('Mic
 bfile.pack()
 
 def fileinformation():
-    tk.messagebox.showinfo(title="Help", message=None)
+    tk.messagebox.showinfo(title="Help", 
+    message="File Section can be used to open New or \nExisting project lined up in your system.\n\n"+
+    "Also you can save your file in two categories.\n\nCheck out help section in Compile.")
 
 m1 = Menu(bfile, tearoff = 0)
 m1.add_command(label ="Open Existing Project")
@@ -66,12 +63,21 @@ taskcompile = tk.Frame(frameT, bg="grey")
 taskcompile.place(relwidth=0.06009, relheight=0.9, relx=0.042, rely=0.05)
 bcompile = tk.Label(taskcompile, text="Compile", padx=25, pady=15, fg="white", font=('Microsoft YaHei UI', 10, "bold"), bg="red2")
 bcompile.pack()
+
+def compileinformation():
+    tk.messagebox.showinfo(title="Help: Know the difference?", 
+    message="Compilation of your Project is possible in two formats:\n\n"+
+    "Compiling in ENVI format, saves it in Python file, that allows you to run your file in Test Mode.\n\n"+
+    "Compiling in an Executable file, it can be easily run on any Windows system.\n\n\n\nGeneral Advice: \n\n"+
+    "Compiling in ENVI format helps you identify any unfound mistakes in the process "+
+    "and once you're done you can compile it in an Executable.")
+    
 m2 = Menu(bcompile, tearoff = 0)
 m2.add_command(label ="Compile in ENVI editor format")
 m2.add_separator()
 m2.add_command(label ="Compile in Executable file")
 m2.add_separator()
-m2.add_command(label ="Help: Know the difference?")
+m2.add_command(label ="Help: Know the difference?", command=compileinformation)
 def do_popup(event):
             try:
                 m2.tk_popup(event.x_root, event.y_root)
@@ -87,7 +93,7 @@ bview.pack()
 m3 = Menu(bview, tearoff = 0)
 m3.add_command(label ="View Page Number: (Ctrl + F)")
 m3.add_separator()
-m3.add_command(label ="View Fullscreen Mode",)# command=fullscreen)  
+m3.add_command(label ="View Fullscreen Mode",)  
 def do_popup(event):
             try:
                 m3.tk_popup(event.x_root, event.y_root)
@@ -100,9 +106,6 @@ taskedit = tk.Frame(frameT, bg="grey")
 taskedit.place(relwidth=0.04, relheight=0.9, relx=0.1435, rely=0.05)
 bedit = tk.Label(taskedit, text="Edit", padx=25, pady=15, fg="white", font=('Microsoft YaHei UI', 10, "bold"), bg="red2",)# command=lambda: controller.show_frame(Pagetakeskipinfo),)# relief=SUNKEN)
 bedit.pack()
-        # def editdetails(event):
-        #     controller.show_frame(Pagetakeskipinfo)
-        # bedit.bind("<Button-1>", editdetails)
         
 taskback = tk.Frame(frameT, bg="grey")
 taskback.place(relwidth=0.03, relheight=0.9, relx=0.938, rely=0.05)
@@ -114,9 +117,8 @@ taskhelp = tk.Frame(frameT, bg="grey")
 taskhelp.place(relwidth=0.03, relheight=0.9, relx=0.9685, rely=0.05)
 buthelp = tk.Label(taskhelp, text= "?", padx=25, pady=25, fg="white", font=("Arial",10, "bold"), bg="red2")
 buthelp.pack()
-        # def gohelp(event):
-        #         controller.show_frame(HelpPagec)
-        # buthelp.bind("<Button-1>", gohelp)
+
+
 
 frame = tk.Frame(self, bg="lightblue")
 frame.place(relwidth=0.3, relheight=0.919, relx=0.01, rely=0.06)
@@ -130,21 +132,29 @@ mainframe = tk.Frame(frame0, bg="grey")
 mainframe.place(relwidth=0.99, relheight=0.98, relx=0.005, rely=0.01)
 
 def graphic():
-            filename = filedialog.askopenfilename(initialdir="/", title="Select Image or Video File",
+            filenameg = filedialog.askopenfilename(initialdir="/", title="Select Image or Video File",
             filetypes=(("JPG","*.jpg"), ("PNG","*.png"), ("MP4","*.mp4"), ("MKV","*.mkv"), ("All Files", "*.*")))
             
-            my_image=Image.open(filename)
-            resize = my_image.resize((900, 350))
+            copy = shutil.copy(filenameg, img_folder)
+            
+            file_name= os.path.basename(filenameg)
+            file=(img_folder+file_name)
+            #print(file)
+            
+            my_image=Image.open(filenameg)
+            resize = my_image.resize((900, 460))
             img1 = ImageTk.PhotoImage(resize)
             badd1 = Label(mainframe, image= img1, borderwidth=0)
             badd1.image = img1
             badd1.pack()
             
             def anotherimg():
+                os.remove(file)
                 graphic()
                 badd1.pack_forget()
                 
             def deleteimg():
+                os.remove(file)
                 badd1.pack_forget()
                 badd.pack()
                 
@@ -168,9 +178,6 @@ def graphic():
                     m.grab_release()
             
             badd1.bind("<Button-3>", do_popup)
-            # label=Button(mainframe,image=img1)
-            # label.image = img1
-            # label.pack()
             badd.pack_forget()
 
 photo = Image.open("ENVI_algo/gui/logo/addimage.png")
@@ -192,47 +199,9 @@ nextbutton = tk.Button(nextbuttonframe, text=">", padx=95, pady=10, fg="white", 
 nextbutton.pack()
 
 textframe1 = tk.Frame(frame0, bg="lightgrey")
-textframe1.place(relwidth=0.2, relheight=0.05, relx=0.01, rely=0.700)
+textframe1.place(relwidth=0.2, relheight=0.05, relx=0.02, rely=0.700)
 textframe2 = tk.Frame(frame0, bg="white")
 textframe2.place(relwidth=1, relheight=0.25, relx=0, rely=0.750)
-
-# def on_entry_click(event):
-#     """function that gets called whenever entry is clicked"""
-#     if entry.cget('fg') == 'grey':
-#        entry.delete(0, "end") # delete all the text in the entry
-#        entry.insert(0, '') #Insert blank for user input
-#        entry.config(fg = 'black')
-# def on_focusout(event):
-#     if entry.get() == '':
-#         entry.insert(0, "+Add Character's Name Here")
-#         entry.config(fg = 'grey')
-        
-# entry = tk.Entry(textframe1, bd=1)
-# entry.insert(0, "+Add Character's Name Here")
-# entry.bind('<FocusIn>', on_entry_click)
-# entry.bind('<FocusOut>', on_focusout)
-# entry.config(fg = 'grey')
-# entry.pack(side="left")
-# entry.place(x=0,y=0, width=200, height=25)
-
-# def on_entry_click1(event):
-#     """function that gets called whenever entry is clicked"""
-#     if entry1.cget('fg') == 'grey':
-#        entry1.delete(0, "end") # delete all the text in the entry
-#        entry1.insert(0, '') #Insert blank for user input
-#        entry1.config(fg = 'black')
-# def on_focusout1(event):
-#     if entry1.get() == '':
-#         entry1.insert(0, "+Add Text- Story Plot, Character's Dialogue, Creator Narration, etc.")
-#         entry1.config(fg = 'grey')
-
-# entry1 = tk.Entry(textframe2, bd=1)
-# entry1.insert(0, "+Add Text- Story Plot, Character's Dialogue, Creator Narration, etc.")
-# entry1.bind('<FocusIn>', on_entry_click1)
-# entry1.bind('<FocusOut>', on_focusout1)
-# entry1.config(fg = 'grey')
-# entry1.pack(side="left", anchor=NW)
-# entry1.place(x=0,y=0, width=887, height=120)
 
 my_text1=Text(textframe1, width=100, height=10,font=('Helvetica',12,), bg="lightgrey")#)
 my_text1.pack()
