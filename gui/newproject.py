@@ -13,6 +13,23 @@ self.state("zoomed")
 
 img_folder="ENVI_algo/ENVI-Projects/Personal-project/img-folder/"
 music_folder="ENVI_algo/ENVI-Projects/Personal-project/music-folder/"
+text_folder="ENVI_algo/ENVI-Projects/Personal-project/text-folder/"
+self.counter = 0
+myfont42 =("Microsoft YaHei UI", 25, "bold")
+
+def mainalgorithm():
+    def minus():
+        
+        if self.counter <1:
+            self.counter=0
+        else:
+            self.counter -= 1
+        #L['text'] = 'Button clicked: ' + str(self.counter)
+        
+    def plus():
+        self.counter -= 1
+        #L['text'] = 'Button clicked: ' + str(self.counter)
+        
 
 def loadmusic():
             filenamem = filedialog.askopenfilename(initialdir="C:/Users/Admin/Music", title="Select Your Music File",
@@ -132,53 +149,57 @@ mainframe = tk.Frame(frame0, bg="grey")
 mainframe.place(relwidth=0.99, relheight=0.98, relx=0.005, rely=0.01)
 
 def graphic():
-            filenameg = filedialog.askopenfilename(initialdir="/", title="Select Image or Video File",
-            filetypes=(("JPG","*.jpg"), ("PNG","*.png"), ("MP4","*.mp4"), ("MKV","*.mkv"), ("All Files", "*.*")))
+    try:
+        filenameg = filedialog.askopenfilename(initialdir="/", title="Select Image or Video File",
+        filetypes=(("JPG","*.jpg"), ("PNG","*.png"), ("MP4","*.mp4"), ("MKV","*.mkv"), ("All Files", "*.*")))
+        
+        copy = shutil.copy(filenameg, img_folder)
+        
+        file_name= os.path.basename(filenameg)
+        file=(img_folder+file_name)
+        #print(file)
+        new_path=(file)
+        
+        my_image=Image.open(filenameg)
+        resize = my_image.resize((900, 460))
+        img1 = ImageTk.PhotoImage(resize)
+        badd1 = Label(mainframe, image= img1, borderwidth=0)
+        badd1.image = img1
+        badd1.pack()
+        
+        def anotherimg():
+            os.remove(file)
+            graphic()
+            badd1.pack_forget()
             
-            copy = shutil.copy(filenameg, img_folder)
+        def deleteimg():
+            os.remove(file)
+            badd1.pack_forget()
+            badd.pack()
             
-            file_name= os.path.basename(filenameg)
-            file=(img_folder+file_name)
-            #print(file)
+        def information():
+            tk.messagebox.showinfo(title="Help", message=None)
             
-            my_image=Image.open(filenameg)
-            resize = my_image.resize((900, 460))
-            img1 = ImageTk.PhotoImage(resize)
-            badd1 = Label(mainframe, image= img1, borderwidth=0)
-            badd1.image = img1
-            badd1.pack()
-            
-            def anotherimg():
-                os.remove(file)
-                graphic()
-                badd1.pack_forget()
-                
-            def deleteimg():
-                os.remove(file)
-                badd1.pack_forget()
-                badd.pack()
-                
-            def information():
-                tk.messagebox.showinfo(title="Help", message=None)
-                
-            m = Menu(taskfile, tearoff = 0)
-            m.add_command(label ="Add another image or video", command=anotherimg)
-            m.add_command(label ="Delete current image or video", command=deleteimg)
-            m.add_separator()
-            m.add_command(label ="Copy")
-            m.add_command(label ="Paste")
-            m.add_separator()
-            m.add_command(label ="Help", command=information)
-            
-            
-            def do_popup(event):
-                try:
-                    m.tk_popup(event.x_root, event.y_root)
-                finally:
-                    m.grab_release()
-            
-            badd1.bind("<Button-3>", do_popup)
-            badd.pack_forget()
+        m = Menu(taskfile, tearoff = 0)
+        m.add_command(label ="Add another image or video", command=anotherimg)
+        m.add_command(label ="Delete current image or video", command=deleteimg)
+        m.add_separator()
+        m.add_command(label ="Copy")
+        m.add_command(label ="Paste")
+        m.add_separator()
+        m.add_command(label ="Help", command=information)
+        
+        
+        def do_popup(event):
+            try:
+                m.tk_popup(event.x_root, event.y_root)
+            finally:
+                m.grab_release()
+        
+        badd1.bind("<Button-3>", do_popup)
+        badd.pack_forget()
+    except FileNotFoundError:
+        print("No file was selected")
 
 photo = Image.open("ENVI_algo/gui/logo/addimage.png")
 resize = photo.resize((950, 700))
@@ -203,15 +224,24 @@ textframe1.place(relwidth=0.2, relheight=0.05, relx=0.02, rely=0.700)
 textframe2 = tk.Frame(frame0, bg="white")
 textframe2.place(relwidth=1, relheight=0.25, relx=0, rely=0.750)
 
+
+def pgfileminus():
+        
+        if self.counter <1:
+            self.counter=0
+        else:
+            self.counter -= 1
+
+
 my_text1=Text(textframe1, width=100, height=10,font=('Helvetica',12,), bg="lightgrey")#)
 my_text1.pack()
 text_file=open("ENVI_algo/gui/temp/script1.envi",'r')
 content=text_file.read()
 my_text1.insert(END, content)
 text_file.close()
-def save_txt1():
-    save_file=open("ENVI_algo/gui/temp/script1.envi",'w')
-    save_file.write(my_text1.get(1.0, END))
+# def save_txt1():
+#     save_file=open(pgsavefilechar,'w')
+#     save_file.write(my_text1.get(1.0, END))
 
 
 my_text2=Text(textframe2, width=100, height=10,font=('Helvetica',16))
@@ -220,9 +250,105 @@ text_file=open("ENVI_algo/gui/temp/script2.envi",'r')
 content=text_file.read()
 my_text2.insert(END, content)
 text_file.close()
-def save_txt2():
-    save_file=open("ENVI_algo/gui/temp/script2.envi",'w')
-    save_file.write(my_text2.get(1.0, END))
+# def save_txt2():
+#     save_file=open(pgsavefileline,'w')
+#     save_file.write(my_text2.get(1.0, END))
+    
+def writealgorithm():
+    def pgfileplus():
+        self.counter += 1
+    #L['text'] = 'Button clicked: ' + str(self.counter)
+    pgfileplus()
+    
+    pgsavefilechar = text_folder+"characters/"+"pg"+str(self.counter)+".envi"
+    pgsavefileline = text_folder+"lines/"+"pg"+str(self.counter)+".envi"    
+        
+    def create():
+        try:
+            with open(pgsavefilechar, 'w') as f:
+                f.write('')
+        except FileNotFoundError:
+            print("The 'docs' directory does not exist")
+            
+        try:
+            with open(pgsavefileline, 'w') as f:
+                f.write('')
+        except FileNotFoundError:
+            print("The 'docs' directory does not exist")
+    create()
+            
+    def save_txt1():
+        save_file=open(pgsavefilechar,'w')
+        save_file.write(my_text1.get(1.0, END))
+    save_txt1()
+        
+    def save_txt2():
+        save_file=open(pgsavefileline,'w')
+        save_file.write(my_text2.get(1.0, END))
+    save_txt2()
+    
+    
+    
+
+def parametersettings():
+    paraframe= tk.Frame(bg="#6495ED")
+    paraframe.place(relwidth=1, relheight=1, relx=0, rely=0)
+    
+    innerparaframe1= tk.Frame(paraframe, bg="lightblue")
+    innerparaframe1.place(relwidth=0.380, relheight=0.8, relx=0.1, rely=0.1)
+    
+    innerparaframe2= tk.Frame(paraframe, bg="lightblue")
+    innerparaframe2.place(relwidth=0.380, relheight=0.8, relx=0.520, rely=0.1)
+    
+    
+    
+    aboutfileloc= "ENVI/ENVI Projects/Personal-Project/text-folder/AboutProject.envi"
+    credfileloc= "ENVI/ENVI Projects/Personal-Project/text-folder/ProjectCredits.envi"
+    
+    def editabout():
+        try:
+            textingframe=Frame(innerparaframe2, bg="lightblue")
+            textingframe.place(relwidth=0.9, relheight=0.6, relx=0.05, rely=0.1)
+            about_text=Text(textingframe, width=100, height=100,font=('Helvetica',16))
+            about_text.pack(anchor="s")
+            about_file=open(aboutfileloc,'r')
+            content=text_file.read()
+            about_text.insert(END, content)
+            about_file.close()
+        except ValueError:
+            print("Nothing was typed or changed")
+        
+    def editcredit():
+        try:
+            textingframe=Frame(innerparaframe2, bg="lightblue")
+            textingframe.place(relwidth=0.9, relheight=0.6, relx=0.05, rely=0.1)
+            credit_text=Text(textingframe, width=100, height=100,font=('Helvetica',16))
+            credit_text.pack(anchor="center")
+            cred_file=open(credfileloc,'r')
+            content=text_file.read()
+            credit_text.insert(END, content)
+            cred_file.close()
+        except ValueError:
+            print("Nothing was typed or changed")
+        
+    def closeframe():
+            paraframe.destroy()
+            
+            
+    buttonframe = tk.Frame(innerparaframe1, bg="#6495ED")
+    buttonframe.place(relwidth=0.6, relheight=0.2, relx=0.2, rely=0.2)
+    bflow = tk.Button(buttonframe, text="ABOUT SECTION", padx=700, pady=700, fg="white", borderwidth=0, font=('Microsoft YaHei UI', 20, "bold"), bg="red",command=editabout)
+    bflow.pack()
+    
+    buttonframe = tk.Frame(innerparaframe1, bg="#6495ED")
+    buttonframe.place(relwidth=0.6, relheight=0.2, relx=0.2, rely=0.6)
+    bflow = tk.Button(buttonframe, text="CREDITS SECTION", padx=700, pady=700, fg="white", borderwidth=0, font=('Microsoft YaHei UI', 20, "bold"), bg="red",command=editcredit)
+    bflow.pack()
+            
+    showbt = Button(paraframe, text="Return", borderwidth=0, fg="gray1", bg="lightblue", font=myfont42, command=closeframe)
+    showbt.place(x=1180, y=600)
+        
+
 
 
 frame1 = tk.Frame(self, bg="lightblue")
@@ -250,13 +376,17 @@ bimageset.pack()
 
 buttonframe = tk.Frame(frame1, bg="#6495ED")
 buttonframe.place(relwidth=0.275, relheight=0.25, relx=0.364, rely=0.6)
-bparaset = tk.Button(buttonframe, text="PARAMETER SETTINGS", padx=75, pady=10, fg="white", borderwidth=0, font=('Microsoft YaHei UI', 15, "bold"), bg="#FF6103")
+bparaset = tk.Button(buttonframe, text="PARAMETER SETTINGS", padx=75, pady=10, fg="white", borderwidth=0, font=('Microsoft YaHei UI', 15, "bold"), bg="#FF6103", command=parametersettings)
 bparaset.pack()
 
 buttonframe = tk.Frame(frame1, bg="#6495ED")
 buttonframe.place(relwidth=0.275, relheight=0.25, relx=0.705, rely=0.6)
-bsandn = tk.Button(buttonframe, text="SAVE & NEXT", padx=75, pady=10, fg="white", font=('Microsoft YaHei UI', 15, "bold"), bg="#FF6103", command=lambda: [save_txt1(), save_txt2()])
-bsandn.pack()        
+bsandn = tk.Button(buttonframe, text="SAVE & NEXT", padx=75, pady=10, fg="white", font=('Microsoft YaHei UI', 15, "bold"), bg="#FF6103", command=writealgorithm)#command=lambda: [pgfileplus(),create(), save_txt1(), save_txt2(),])
+bsandn.pack() 
+
+
+
+       
         
         
 self.mainloop()
