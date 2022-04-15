@@ -32,10 +32,14 @@ def mainalgorithm():
         
 
 def loadmusic():
+    
             filenamem = filedialog.askopenfilename(initialdir="C:/Users/Admin/Music", title="Select Your Music File",
             filetypes=(("MP3","*.mp3"), ("WAV", "*.wav"), ("AAC", "*.aac"), ("3GP", "*.3gp"), ("WEBM", "*.webm")))
             
-            copy = shutil.copy(filenamem, music_folder)
+            try:
+                copy = shutil.copy(filenamem, music_folder)
+            except FileNotFoundError:
+                print("In Create New Project, no music file was selected")  
             
 canvas = tk.Canvas(self, height=700, width=1340, bg="white")
 canvas.pack()

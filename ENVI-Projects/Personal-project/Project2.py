@@ -32,20 +32,69 @@ def playonHpage():
 playonHpage()
 
 def loadframe(event):
-            loadframe = tk.Frame(bg="maroon")
-            loadframe.place(relwidth=1, relheight=1, relx=0, rely=0)
-            
-            innerframe = tk.Frame(loadframe, bg="coral4")
-            innerframe.place(relwidth=0.7, relheight=0.7, relx=0.15, rely=0.15)
-            
-            loadlabel = tk.Label(loadframe, text="Load", fg="white", font=myfont72, bg="maroon",)
-            loadlabel.place(x=20, y=20)
-            
-            def closeframe():
-                loadframe.destroy()
-            
-            showbt = Button(loadframe, text="Return", borderwidth=0, fg="white", bg="maroon", font=myfont42, command=closeframe)
-            showbt.place(x=1180, y=600)
+    
+    loadframe = tk.Frame(bg="maroon")
+    loadframe.place(relwidth=1, relheight=1, relx=0, rely=0)
+    
+    scrollframe = LabelFrame(loadframe, bg="coral4")
+
+    scrollframe.pack(fill="both", expand="yes", padx=200, pady=100)
+
+    innnerframe = Canvas(scrollframe, bg="coral4")
+    innnerframe.place(relwidth=1, relheight=1, relx=0, rely=0)
+
+    
+    innerframe = tk.Frame(innnerframe, bg="coral4")
+
+    innnerframe.create_window((0, 0), window=innerframe, anchor="nw")
+    
+    l1 = tk.Button(innerframe, bg="grey", padx=156, pady=115,)
+    l1.grid(row=1,column=0)
+    
+    l2 = tk.Button(innerframe, bg="grey", padx=156, pady=115,)
+    l2.grid(row=1,column=1)
+    
+    l3 = tk.Button(innerframe, bg="grey", padx=156, pady=115,)
+    l3.grid(row=1,column=2)
+    
+    l4 = tk.Button(innerframe, bg="grey", padx=156, pady=115,)
+    l4.grid(row=2,column=0)
+    
+    l5 = tk.Button(innerframe, bg="grey", padx=156, pady=115,)
+    l5.grid(row=2,column=1)
+    
+    l6 = tk.Button(innerframe, bg="grey", padx=156, pady=115,)
+    l6.grid(row=2,column=2)
+    
+    loadlabel = tk.Label(loadframe, text="Load", fg="white", font=myfont72, bg="maroon",)
+    loadlabel.place(x=20, y=20)
+    
+    photo = Image.open("ENVI_algo/gui/logo/uparrowimage.png")
+    resize = photo.resize((50, 50))
+    img1 = ImageTk.PhotoImage(resize)
+    uplabel = tk.Button(loadframe,  fg="white",  image= img1, bg="maroon",relief=FLAT)
+    uplabel.image = img1
+    uplabel.place(x=1190, y=100)
+    
+    photo = Image.open("ENVI_algo/gui/logo/downarrowimage.png")
+    resize = photo.resize((50, 50))
+    img2 = ImageTk.PhotoImage(resize)
+    downlabel = tk.Button(loadframe,  fg="white",  image= img2, bg="maroon",relief=FLAT)
+    downlabel.image = img2
+    downlabel.place(x=1190, y=545)
+    
+    countlabel = tk.Label(loadframe,  fg="white",   bg="coral4",)#image= img2,
+    countlabel.place(x=1190, y=345)
+    
+
+    
+    def closeframe():
+        loadframe.destroy()
+    
+    showbt = Button(loadframe, text="Return", borderwidth=0, fg="white", bg="maroon", font=myfont42, command=closeframe)
+    showbt.place(x=1180, y=600)
+
+
             
 def saveframe(event):
             saveframe = tk.Frame(bg="maroon")
@@ -53,6 +102,8 @@ def saveframe(event):
             
             innerframe = tk.Frame(saveframe, bg="coral4")
             innerframe.place(relwidth=0.7, relheight=0.7, relx=0.15, rely=0.15)
+            v = Scrollbar(innerframe)
+            v.pack(side = RIGHT, fill = Y)
             
             savelabel = tk.Label(saveframe, text="Save", fg="white", font=myfont72, bg="maroon",)
             savelabel.place(x=20, y=20)
@@ -64,12 +115,31 @@ def saveframe(event):
             showbt.place(x=1180, y=600)
             
 def galleryframe(event):
+
             galleryframe = tk.Frame(bg="maroon")
             galleryframe.place(relwidth=1, relheight=1, relx=0, rely=0)
             
             innerframe = tk.Frame(galleryframe, bg="coral4")
             innerframe.place(relwidth=0.7, relheight=0.7, relx=0.15, rely=0.15)
             
+            l1 = tk.Button(innerframe, bg="grey", padx=156, pady=115,)
+            l1.grid(row=1,column=0)
+            
+            l2 = tk.Button(innerframe, bg="grey", padx=156, pady=115,)
+            l2.grid(row=1,column=1)
+            
+            l3 = tk.Button(innerframe, bg="grey", padx=156, pady=115,)
+            l3.grid(row=1,column=2)
+            
+            l4 = tk.Button(innerframe, bg="grey", padx=156, pady=115,)
+            l4.grid(row=2,column=0)
+            
+            l5 = tk.Button(innerframe, bg="grey", padx=156, pady=115,)
+            l5.grid(row=2,column=1)
+            
+            l6 = tk.Button(innerframe, bg="grey", padx=156, pady=115,)
+            l6.grid(row=2,column=2)
+                    
             gallerylabel = tk.Label(galleryframe, text="Gallery", fg="white", font=myfont72, bg="maroon",)
             gallerylabel.place(x=20, y=20)
             
@@ -86,6 +156,19 @@ def aboutframe(event):
             innerframe = tk.Frame(aboutframe, bg="coral4")
             innerframe.place(relwidth=0.7, relheight=0.7, relx=0.15, rely=0.15)
             
+            v = Scrollbar(innerframe)
+
+            
+            txtarea = Text(innerframe,  bg='coral4', fg='orange1', font= myfont22, yscrollcommand = v.set, borderwidth=0)#width=75, height=20,
+            txtarea.place(relwidth=0.95, relheight=1, relx=0.03, rely=0)
+            def openFile():
+                tf = open("ENVI/ENVI Projects/Personal-project/text-folder/AboutProject.envi", 'r')  # or tf = open(tf, 'r')
+                data = tf.read()
+                txtarea.insert(END, data)
+                tf.close()
+            openFile()
+            v.config(command=txtarea.yview)
+            
             aboutlabel = tk.Label(aboutframe, text="About", fg="white", font=myfont72, bg="maroon",)
             aboutlabel.place(x=20, y=20)
             
@@ -101,6 +184,19 @@ def creditsframe(event):
             
             innerframe = tk.Frame(creditsframe, bg="coral4")
             innerframe.place(relwidth=0.7, relheight=0.7, relx=0.15, rely=0.15)
+            
+            v = Scrollbar(innerframe)
+        
+            
+            txtarea = Text(innerframe,  bg='coral4', fg='orange1', font= myfont22, yscrollcommand = v.set, borderwidth=0)#width=75, height=20,
+            txtarea.place(relwidth=0.95, relheight=1, relx=0.03, rely=0)
+            def openFile():
+                tf = open("ENVI/ENVI Projects/Personal-project/text-folder/ProjectCredits.envi", 'r')  # or tf = open(tf, 'r')
+                data = tf.read()
+                txtarea.insert(END, data)
+                tf.close()
+            openFile()
+            v.config(command=txtarea.yview)
             
             creditslabel = tk.Label(creditsframe, text="Credits", fg="white", font=myfont72, bg="maroon",)
             creditslabel.place(x=20, y=20)
@@ -119,17 +215,17 @@ def helpframe(event):
             innerframe.place(relwidth=0.7, relheight=0.7, relx=0.15, rely=0.15)
             
             v = Scrollbar(innerframe)
-            v.pack(side = RIGHT, fill = Y)
+           
             
             txtarea = Text(innerframe,  bg='coral4', fg='orange1', font= myfont22, yscrollcommand = v.set, borderwidth=0)#width=75, height=20,
             txtarea.place(relwidth=0.95, relheight=1, relx=0.03, rely=0)
             def openFile():
-                tf = open("ENVI/ENVI Projects/Personal-project/text-folder/Projecthelp.txt", 'r')  # or tf = open(tf, 'r')
+                tf = open("ENVI/ENVI Projects/Personal-project/text-folder/ProjectHelp.envi", 'r')  # or tf = open(tf, 'r')
                 data = tf.read()
                 txtarea.insert(END, data)
                 tf.close()
             openFile()
-            v.config(command=txtarea.yview)
+            
             
             helplabel = tk.Label(helpframe, text="Help", fg="white", font=myfont72, bg="maroon",)
             helplabel.place(x=20, y=20)
@@ -151,26 +247,26 @@ def settingsframe(event):
             setlabel.place(x=20, y=20)
                         
             master_frame = Frame(innerframe, bg="coral4")
-            master_frame.pack(pady=20)
+            master_frame.pack(anchor="w")
 
-            volume_frame = LabelFrame(master_frame, text="Volume", bg="coral4", borderwidth=0)
-            volume_frame.pack()
+            volume_frame = LabelFrame(master_frame, text="Volume", bg="coral4", borderwidth=0, font=myfont42, fg="gray1")
+            volume_frame.pack(padx=350, pady=175)
 
             def volume(x):
                 pygame.mixer.music.set_volume(volume_slider.get())
                 current_volume = pygame.mixer.music.get_volume()
                 current_volume = current_volume * 100
                 
-            volume_slider = ttk.Scale(volume_frame, from_=0, to=1, orient=HORIZONTAL, value=1, command=volume, length=300)
+            volume_slider = ttk.Scale(volume_frame, from_=0, to=1, orient=HORIZONTAL, value=1, command=volume, length=300,)
             volume_slider.pack(pady=10)
             
             def closeframe():
                 setframe.destroy()
             
             showbt = Button(setframe, text="Return", borderwidth=0, fg="white", bg="maroon", font=myfont42, command=closeframe)
-            showbt.place(x=1180, y=600)         
-    
-
+            showbt.place(x=1180, y=600) 
+            
+            
 
 
 
@@ -190,18 +286,22 @@ class Myproject(tk.Tk):
 
         self.frames = {}
 
-        for F in (Homepage, Startofnovel, pg2):
-
+        for F in (Homepage, Startofnovel, pgend,):
+            
             frame = F(container, self)
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky="nsew")
 
         self.show_frame(Homepage)
+        self.state("zoomed")
 
     def show_frame(self, cont):
 
         frame = self.frames[cont]
         frame.tkraise()
+
+
+
 
         
 class Homepage(tk.Frame):
@@ -296,16 +396,89 @@ class Startofnovel(tk.Frame):
             else:
                 messagebox.showwarning('Error', 'Something went wrong!')
 
-        frame = tk.Frame(self, bg="coral4")
+        frame = tk.Frame(self, bg="black")
         frame.place(relwidth=1, relheight=1, relx=0, rely=0)
+
         
         textframe = tk.Frame(frame, bg="maroon")
         textframe.place(relwidth=1, relheight=0.2, relx=0, rely=0.8)
         
-        charnameframe = tk.Frame(frame, bg="maroon")
-        charnameframe.place(relwidth=0.2, relheight=0.05, relx=0.01, rely=0.75)
-        charnameinframe = tk.Frame(charnameframe, bg="coral4")
-        charnameinframe.place(relwidth=0.9, relheight=0.9, relx=0.05, rely=0.05)
+        txtarea = Text(textframe,  bg='maroon', fg='white', font= myfont22, borderwidth=0,)#width=75, height=20,
+        txtarea.place(relwidth=0.95, relheight=1, relx=0.03, rely=0)
+        def openFile():
+            tf = open("ENVI/ENVI Projects/Personal-project/text-folder/Page0.envi", 'r')  # or tf = open(tf, 'r')
+            data = tf.read()
+            txtarea.insert(END, data)
+            tf.close()
+        openFile()
+        
+        # charnameframe = tk.Frame(frame, bg="maroon")
+        # charnameframe.place(relwidth=0.2, relheight=0.05, relx=0.01, rely=0.75)
+        # charnameinframe = tk.Frame(charnameframe, bg="coral4")
+        # charnameinframe.place(relwidth=0.9, relheight=0.9, relx=0.05, rely=0.05)
+        
+        buttonframe = tk.Frame(textframe, bg="maroon")
+        buttonframe.place(relwidth=0.1, relheight=0.15, relx=0.3, rely=0.82)
+        menuonpage = tk.Label(buttonframe, text="Menu", padx=250, pady=30, fg="white", font=myfont21, bg="maroon")
+        menuonpage.pack()
+        menuonpage.bind("<Button-1>", returntitle)
+        
+        buttonframe = tk.Frame(textframe, bg="maroon")
+        buttonframe.place(relwidth=0.1, relheight=0.15, relx=0.4, rely=0.82)
+        saveonpage = tk.Button(buttonframe, text="Save", padx=250, pady=30, borderwidth=0, fg="white", font=myfont21, bg="maroon",)# command=lambda: controller.show_frame(Savefile)) #, selectbg="maroon"
+        saveonpage.pack()
+        saveonpage.bind("<Button-1>", saveframe)
+        
+        buttonframe = tk.Frame(textframe, bg="maroon")
+        buttonframe.place(relwidth=0.1, relheight=0.15, relx=0.5, rely=0.82)
+        loadonpage = tk.Label(buttonframe, text="Load", padx=250, pady=30, fg="white", font=myfont21, bg="maroon")
+        loadonpage.pack()
+        loadonpage.bind("<Button-1>", loadframe)
+        
+        buttonframe = tk.Frame(textframe, bg="maroon")
+        buttonframe.place(relwidth=0.1, relheight=0.15, relx=0.6, rely=0.82)
+        setonpage = tk.Label(buttonframe, text="Settings", padx=250, pady=30, fg="white", font=myfont21, bg="maroon")
+        setonpage.pack()
+        setonpage.bind("<Button-1>", settingsframe)
+
+
+class pgend(tk.Frame):
+     
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        
+        
+        def returntitle(event):
+            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? \nAll unsaved progress will be lost.')
+            if res == 'yes':
+                pygame.mixer.music.stop()
+                playonHpage()
+                controller.show_frame(Homepage)
+            elif res == 'no':
+                exit
+            else:
+                messagebox.showwarning('Error', 'Something went wrong!')
+
+        frame = tk.Frame(self, bg="black")
+        frame.place(relwidth=1, relheight=1, relx=0, rely=0)
+
+        
+        textframe = tk.Frame(frame, bg="maroon")
+        textframe.place(relwidth=1, relheight=0.2, relx=0, rely=0.8)
+        
+        txtarea = Text(textframe,  bg='maroon', fg='white', font= myfont22, borderwidth=0,)#width=75, height=20,
+        txtarea.place(relwidth=0.95, relheight=1, relx=0.03, rely=0)
+        def openFile():
+            tf = open("ENVI/ENVI Projects/Personal-project/text-folder/Pageend.envi", 'r')  # or tf = open(tf, 'r')
+            data = tf.read()
+            txtarea.insert(END, data)
+            tf.close()
+        openFile()
+        
+        # charnameframe = tk.Frame(frame, bg="maroon")
+        # charnameframe.place(relwidth=0.2, relheight=0.05, relx=0.01, rely=0.75)
+        # charnameinframe = tk.Frame(charnameframe, bg="coral4")
+        # charnameinframe.place(relwidth=0.9, relheight=0.9, relx=0.05, rely=0.05)
         
         buttonframe = tk.Frame(textframe, bg="maroon")
         buttonframe.place(relwidth=0.1, relheight=0.15, relx=0.3, rely=0.82)
@@ -333,10 +506,29 @@ class Startofnovel(tk.Frame):
 
 
 
-class pg2(tk.Frame):
 
-    def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         
         
 
