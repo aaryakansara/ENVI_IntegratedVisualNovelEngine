@@ -83,7 +83,7 @@ def loadframe(event):
     downlabel.image = img2
     downlabel.place(x=1190, y=545)
     
-    countlabel = tk.Label(loadframe,  fg="white",   bg="coral4",)#image= img2,
+    countlabel = tk.Label(loadframe,  fg="white",   bg="maroon", text="1", font=myfont42)#image= img2,
     countlabel.place(x=1190, y=345)
     
 
@@ -111,7 +111,7 @@ def saveframe(event):
             def closeframe():
                 saveframe.destroy()
             
-            showbt = Button(saveframe, text="Return", borderwidth=0, fg="white", bg="maroon", font=myfont42, command=closeframe)
+            showbt = Button(saveframe, text="Return", borderwidth=0, fg="white", bg="maroon", font=myfont72, command=closeframe)
             showbt.place(x=1180, y=600)
             
 def galleryframe(event):
@@ -225,6 +225,7 @@ def helpframe(event):
                 txtarea.insert(END, data)
                 tf.close()
             openFile()
+            txtarea.config(state=DISABLED)
             
             
             helplabel = tk.Label(helpframe, text="Help", fg="white", font=myfont72, bg="maroon",)
@@ -386,7 +387,7 @@ class Startofnovel(tk.Frame):
         
         
         def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? \nAll unsaved progress will be lost.')
+            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
             if res == 'yes':
                 pygame.mixer.music.stop()
                 playonHpage()
@@ -395,9 +396,16 @@ class Startofnovel(tk.Frame):
                 exit
             else:
                 messagebox.showwarning('Error', 'Something went wrong!')
+                
+        def nextpage(event):
+            try:
+                controller.show_frame(pgend)
+            except NameError:
+                controller.show_frame(pgend)
 
-        frame = tk.Frame(self, bg="black")
+        frame = tk.Frame(self, bg='black')
         frame.place(relwidth=1, relheight=1, relx=0, rely=0)
+        frame.bind('<Button-1>', nextpage)
 
         
         textframe = tk.Frame(frame, bg="maroon")
@@ -411,6 +419,7 @@ class Startofnovel(tk.Frame):
             txtarea.insert(END, data)
             tf.close()
         openFile()
+        txtarea.config(state=DISABLED)
         
         # charnameframe = tk.Frame(frame, bg="maroon")
         # charnameframe.place(relwidth=0.2, relheight=0.05, relx=0.01, rely=0.75)
@@ -440,6 +449,8 @@ class Startofnovel(tk.Frame):
         setonpage = tk.Label(buttonframe, text="Settings", padx=250, pady=30, fg="white", font=myfont21, bg="maroon")
         setonpage.pack()
         setonpage.bind("<Button-1>", settingsframe)
+        
+        
 
 
 class pgend(tk.Frame):
@@ -449,7 +460,7 @@ class pgend(tk.Frame):
         
         
         def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? \nAll unsaved progress will be lost.')
+            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
             if res == 'yes':
                 pygame.mixer.music.stop()
                 playonHpage()
@@ -458,9 +469,15 @@ class pgend(tk.Frame):
                 exit
             else:
                 messagebox.showwarning('Error', 'Something went wrong!')
+                
+        def thereturn(event):
+            pygame.mixer.music.stop()
+            playonHpage()
+            controller.show_frame(Homepage)
 
         frame = tk.Frame(self, bg="black")
         frame.place(relwidth=1, relheight=1, relx=0, rely=0)
+        frame.bind('<Button-1>', thereturn)
 
         
         textframe = tk.Frame(frame, bg="maroon")
@@ -474,13 +491,14 @@ class pgend(tk.Frame):
             txtarea.insert(END, data)
             tf.close()
         openFile()
+        txtarea.config(state=DISABLED)
         
         # charnameframe = tk.Frame(frame, bg="maroon")
         # charnameframe.place(relwidth=0.2, relheight=0.05, relx=0.01, rely=0.75)
         # charnameinframe = tk.Frame(charnameframe, bg="coral4")
         # charnameinframe.place(relwidth=0.9, relheight=0.9, relx=0.05, rely=0.05)
         
-        buttonframe = tk.Frame(textframe, bg="maroon")
+        buttonframe = tk.Frame(textframe, bg='maroon')
         buttonframe.place(relwidth=0.1, relheight=0.15, relx=0.3, rely=0.82)
         menuonpage = tk.Label(buttonframe, text="Menu", padx=250, pady=30, fg="white", font=myfont21, bg="maroon")
         menuonpage.pack()

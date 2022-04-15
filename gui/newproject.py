@@ -11,10 +11,11 @@ self.title('Create New Project')
 self.resizable(True, True)
 self.state("zoomed")
 
-img_folder="ENVI_algo/ENVI-Projects/Personal-project/img-folder/"
-music_folder="ENVI_algo/ENVI-Projects/Personal-project/music-folder/"
-text_folder="ENVI_algo/ENVI-Projects/Personal-project/text-folder/"
+img_folder="ENVI/ENVI Projects/Personal-project/img-folder/"
+music_folder="ENVI/ENVI Projects/Personal-project/music-folder/"
+text_folder="ENVI/ENVI Projects/Personal-project/text-folder/"
 self.counter = 0
+self.count = 0
 myfont42 =("Microsoft YaHei UI", 25, "bold")
 
 def mainalgorithm():
@@ -155,16 +156,21 @@ mainframe.place(relwidth=0.99, relheight=0.98, relx=0.005, rely=0.01)
 def graphic():
     try:
         filenameg = filedialog.askopenfilename(initialdir="/", title="Select Image or Video File",
-        filetypes=(("JPG","*.jpg"), ("PNG","*.png"), ("MP4","*.mp4"), ("MKV","*.mkv"), ("All Files", "*.*")))
+        filetypes=( ("PNG","*.png"), ("JPG","*.jpg"), ("MP4","*.mp4"), ("MKV","*.mkv"), ("All Files", "*.*")))
         
         copy = shutil.copy(filenameg, img_folder)
         
+        self.count += 1
         file_name= os.path.basename(filenameg)
-        file=(img_folder+file_name)
+        old_name = "ENVI/ENVI Projects/Personal-project/img-folder/"+file_name
+        new_name = "ENVI/ENVI Projects/Personal-project/img-folder/pg"+str(self.count)+".png"
+        file_namer= os.rename(old_name, new_name)
+        file_named= os.path.basename(new_name)
+        file=(img_folder+file_named)
         #print(file)
-        new_path=(file)
+        #new_path=(file)
         
-        my_image=Image.open(filenameg)
+        my_image=Image.open(new_name)
         resize = my_image.resize((900, 460))
         img1 = ImageTk.PhotoImage(resize)
         badd1 = Label(mainframe, image= img1, borderwidth=0)
@@ -173,11 +179,13 @@ def graphic():
         
         def anotherimg():
             os.remove(file)
+            self.count -= 1
             graphic()
             badd1.pack_forget()
             
         def deleteimg():
             os.remove(file)
+            self.count -= 1
             badd1.pack_forget()
             badd.pack()
             
