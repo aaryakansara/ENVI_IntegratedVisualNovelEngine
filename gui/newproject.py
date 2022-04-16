@@ -155,10 +155,13 @@ mainframe.place(relwidth=0.99, relheight=0.98, relx=0.005, rely=0.01)
 
 def graphic():
     try:
-        filenameg = filedialog.askopenfilename(initialdir="/", title="Select Image or Video File",
+        filenameg = filedialog.askopenfilename(initialdir="D:/Aarya/Aarya College/aaryasend/aaryasend", title="Select Image or Video File",
         filetypes=( ("PNG","*.png"), ("JPG","*.jpg"), ("MP4","*.mp4"), ("MKV","*.mkv"), ("All Files", "*.*")))
         
-        copy = shutil.copy(filenameg, img_folder)
+        try:
+            copy = shutil.copy(filenameg, img_folder)
+        except FileExistsError:
+            print("File already exists")
         
         self.count += 1
         file_name= os.path.basename(filenameg)
@@ -178,8 +181,8 @@ def graphic():
         badd1.pack()
         
         def anotherimg():
-            os.remove(file)
-            self.count -= 1
+            #os.remove(file)
+            #self.count -= 1
             graphic()
             badd1.pack_forget()
             
