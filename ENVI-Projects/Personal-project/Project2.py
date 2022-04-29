@@ -5164,6 +5164,10 @@ class pg46(tk.Frame):
 
         def prevpage(event):
             try:
+                pygame.mixer.music.stop()
+                pygame.mixer.init()
+                pygame.mixer.music.load("ENVI/ENVI Projects/Personal-project/music-folder/say_something.mp3")
+                pygame.mixer.music.play(-1)
                 controller.show_frame(pg45)
             except NameError:
                 controller.show_frame(pgend)
@@ -5663,7 +5667,11 @@ class pg51(tk.Frame):
 
         def prevpage(event):
             try:
-                controller.show_frame(pg50)
+                pygame.mixer.music.stop()
+                pygame.mixer.init()
+                pygame.mixer.music.load("ENVI/ENVI Projects/Personal-project/music-folder/say_something.mp3")
+                pygame.mixer.music.play(-1)
+                controller.show_frame(pg44)
             except NameError:
                 controller.show_frame(pgend)
 
