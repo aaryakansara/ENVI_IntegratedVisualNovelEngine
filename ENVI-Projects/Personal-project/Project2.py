@@ -31,6 +31,11 @@ def playonHpage():
     pygame.mixer.music.play(-1)
 playonHpage()
 
+def playonHpage2():
+    pygame.mixer.init()
+    pygame.mixer.music.load("ENVI/ENVI Projects/Personal-project/music-folder/counting_stars3.mp3")
+    pygame.mixer.music.play(-1)
+
 def loadframe(event):
     
     loadframe = tk.Frame(bg="maroon")
@@ -310,6 +315,18 @@ def settingsframe(event):
             showbt.place(x=1180, y=600) 
             
             
+def returntitle(event):
+            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
+            if res == 'yes':
+                pygame.mixer.music.stop()
+                app.show_frame(Homepage)
+                playonHpage2()
+            elif res == 'no':
+                exit
+            else:
+                messagebox.showwarning('Error', 'Something went wrong!')              
+            
+            
 
 
 
@@ -329,7 +346,9 @@ class Myproject(tk.Tk):
 
         self.frames = {}
 
-        for F in (Homepage, Startofnovel, pgend, pg1, pg2, pg3, pg4, pg5, pg6, pg7, pg8, pg9, pg10, pg11, pg12, pg13, pg14, pg15, pg16, pg17, pg18, pg19, pg20, pg21, pg22, pg23, pg24, pg25, pg26, pg27, pg28, pg29, pg30, pg31, pg32, pg33, pg34, pg35, pg36, pg37, pg38, pg39, pg40, pg41, pg42, pg43, pg44, pg45, pg46, pg47, pg48, pg49, pg50, pg51, pg52,):
+        for F in (Homepage, Startofnovel, pgend, pg1, pg2, pg3, pg4, pg5, pg6, pg7, pg8, pg9, pg10, pg11, pg12, pg13, pg14, pg15, 
+                  pg16, pg17, pg18, pg19, pg20, pg21, pg22, pg23, pg24, pg25, pg26, pg27, pg28, pg29, pg30, pg31, pg32, pg33, pg34, 
+                  pg35, pg36, pg37, pg38, pg39, pg40, pg41, pg42, pg43, pg44, pg45, pg46, pg47, pg48, pg49, pg50, pg51, pg52,):
             
             frame = F(container, self)
             self.frames[F] = frame
@@ -428,16 +447,7 @@ class Startofnovel(tk.Frame):
         tk.Frame.__init__(self, parent)
         
         
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+        
                 
         def nextpage(event):
             try:
@@ -453,12 +463,7 @@ class Startofnovel(tk.Frame):
 
         frame = tk.Frame(self, bg='black')
         frame.place(relwidth=1, relheight=1, relx=0, rely=0)
-        # my_image=Image.open('ENVI/ENVI Projects/Personal-project/img-folder/pg1.png')
-        # resize = my_image.resize((1500, 850))
-        # img1 = ImageTk.PhotoImage(resize)
-        # imagelabel = Label(frame, image= img1, borderwidth=0)
-        # imagelabel.image = img1
-        # imagelabel.pack()
+        
         frame.bind('<Button-1>', nextpage)
         frame.bind('<Right>', nextpage)
         
@@ -475,10 +480,7 @@ class Startofnovel(tk.Frame):
         openFile()
         txtarea.config(state=DISABLED)
         
-        # charnameframe = tk.Frame(frame, bg="maroon")
-        # charnameframe.place(relwidth=0.2, relheight=0.05, relx=0.01, rely=0.75)
-        # charnameinframe = tk.Frame(charnameframe, bg="coral4")
-        # charnameinframe.place(relwidth=0.9, relheight=0.9, relx=0.05, rely=0.05)
+       
         
         buttonframe = tk.Frame(textframe, bg="maroon")
         buttonframe.place(relwidth=0.1, relheight=0.15, relx=0.3, rely=0.82)
@@ -554,10 +556,7 @@ class pgend(tk.Frame):
         openFile()
         txtarea.config(state=DISABLED)
         
-        # charnameframe = tk.Frame(frame, bg="maroon")
-        # charnameframe.place(relwidth=0.2, relheight=0.05, relx=0.01, rely=0.75)
-        # charnameinframe = tk.Frame(charnameframe, bg="coral4")
-        # charnameinframe.place(relwidth=0.9, relheight=0.9, relx=0.05, rely=0.05)
+        
         
         buttonframe = tk.Frame(textframe, bg='maroon')
         buttonframe.place(relwidth=0.1, relheight=0.15, relx=0.3, rely=0.82)
@@ -604,16 +603,7 @@ class pg1(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+        
 
         def nextpage(event):
             try:
@@ -706,16 +696,7 @@ class pg2(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+        
 
         def nextpage(event):
             try:
@@ -806,16 +787,7 @@ class pg3(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+        
 
         def nextpage(event):
             try:
@@ -906,16 +878,7 @@ class pg4(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+        
 
         def nextpage(event):
             try:
@@ -1006,16 +969,7 @@ class pg5(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+       
 
         def nextpage(event):
             try:
@@ -1106,16 +1060,7 @@ class pg6(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+        
 
         def nextpage(event):
             try:
@@ -1206,16 +1151,7 @@ class pg7(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+       
 
         def nextpage(event):
             try:
@@ -1306,16 +1242,7 @@ class pg8(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+        
 
         def nextpage(event):
             try:
@@ -1406,16 +1333,7 @@ class pg9(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+        
 
         def nextpage(event):
             try:
@@ -1518,16 +1436,7 @@ class pg10(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+     
 
         def nextpage(event):
             try:
@@ -1618,16 +1527,7 @@ class pg11(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+       
 
         def nextpage(event):
             try:
@@ -1718,16 +1618,7 @@ class pg12(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+        
 
         def nextpage(event):
             try:
@@ -1819,16 +1710,7 @@ class pg13(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+        
 
         def nextpage(event):
             try:
@@ -1923,16 +1805,7 @@ class pg14(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+       
 
         def nextpage(event):
             try:
@@ -2023,16 +1896,7 @@ class pg15(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+       
 
         def nextpage(event):
             try:
@@ -2123,16 +1987,7 @@ class pg16(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+       
 
         def nextpage(event):
             try:
@@ -2223,16 +2078,7 @@ class pg17(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+       
 
         def nextpage(event):
             try:
@@ -2323,16 +2169,7 @@ class pg18(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+        
 
         def nextpage(event):
             try:
@@ -2423,16 +2260,7 @@ class pg19(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+        
 
         def nextpage(event):
             try:
@@ -2523,16 +2351,7 @@ class pg20(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+       
 
         def nextpage(event):
             try:
@@ -2623,16 +2442,7 @@ class pg21(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+        
 
         def nextpage(event):
             try:
@@ -2723,16 +2533,7 @@ class pg22(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+        
 
         def nextpage(event):
             try:
@@ -2823,16 +2624,7 @@ class pg23(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+       
 
         def nextpage(event):
             try:
@@ -2923,16 +2715,7 @@ class pg24(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+        
 
         def nextpage(event):
             try:
@@ -3023,16 +2806,7 @@ class pg25(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+       
 
         def nextpage(event):
             try:
@@ -3123,16 +2897,7 @@ class pg26(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+        
 
         def nextpage(event):
             try:
@@ -3223,16 +2988,7 @@ class pg27(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+        
 
         def nextpage(event):
             try:
@@ -3323,16 +3079,7 @@ class pg28(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+       
 
         def nextpage(event):
             try:
@@ -3423,16 +3170,7 @@ class pg29(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+        
 
         def nextpage(event):
             try:
@@ -3523,16 +3261,7 @@ class pg30(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+       
 
         def nextpage(event):
             try:
@@ -3623,16 +3352,7 @@ class pg31(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+        
 
         def nextpage(event):
             try:
@@ -3723,16 +3443,7 @@ class pg32(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+        
 
         def nextpage(event):
             try:
@@ -3823,16 +3534,7 @@ class pg33(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+      
 
         def nextpage(event):
             try:
@@ -3923,16 +3625,7 @@ class pg34(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+        
 
         def nextpage(event):
             try:
@@ -4023,16 +3716,7 @@ class pg35(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+       
 
         def nextpage(event):
             try:
@@ -4123,16 +3807,7 @@ class pg36(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+       
 
         def nextpage(event):
             try:
@@ -4223,16 +3898,7 @@ class pg37(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+       
 
         def nextpage(event):
             try:
@@ -4323,16 +3989,7 @@ class pg38(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+        
 
         def nextpage(event):
             try:
@@ -4423,16 +4080,7 @@ class pg39(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+        
 
         def nextpage(event):
             try:
@@ -4523,16 +4171,7 @@ class pg40(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+       
 
         def nextpage(event):
             try:
@@ -4623,16 +4262,7 @@ class pg41(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+        
 
         def nextpage(event):
             try:
@@ -4723,16 +4353,7 @@ class pg42(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+       
 
         def nextpage(event):
             try:
@@ -4823,16 +4444,7 @@ class pg43(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+       
 
         def nextpage(event):
             try:
@@ -4923,16 +4535,7 @@ class pg44(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+        
 
         def nextpage(event):
             try:
@@ -5040,16 +4643,7 @@ class pg45(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+    
 
         def nextpage(event):
             try:
@@ -5140,16 +4734,7 @@ class pg46(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+        
 
         def nextpage(event):
             try:
@@ -5248,16 +4833,7 @@ class pg47(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+       
 
         def nextpage(event):
             try:
@@ -5348,16 +4924,7 @@ class pg48(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+       
 
         def nextpage(event):
             try:
@@ -5448,16 +5015,7 @@ class pg49(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+     
 
         def nextpage(event):
             try:
@@ -5548,16 +5106,7 @@ class pg50(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+     
 
         def nextpage(event):
             try:
@@ -5647,16 +5196,7 @@ class pg51(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+       
 
         def nextpage(event):
             try:
@@ -5751,16 +5291,7 @@ class pg52(tk.Frame):
         tk.Frame.__init__(self, parent)
 
 
-        def returntitle(event):
-            res = messagebox.askquestion('Return to Title Screen?', 'Are you sure you want to go back to Title Screen? All unsaved progress will be lost.')
-            if res == 'yes':
-                pygame.mixer.music.stop()
-                playonHpage()
-                controller.show_frame(Homepage)
-            elif res == 'no':
-                exit
-            else:
-                messagebox.showwarning('Error', 'Something went wrong!')
+       
 
         def nextpage(event):
             try:
